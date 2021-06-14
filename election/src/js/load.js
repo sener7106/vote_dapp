@@ -3,7 +3,7 @@
       web3Provider: null,
       contracts: {},
       account: '0x0',
-       
+
       init: function() {
           return App.initWeb3();
       },
@@ -42,7 +42,7 @@
       render: function() {
           var instance;
           var content = $("#main");
- 
+
           // index.html의 loader와 content와 연결
 
           content.show();
@@ -59,71 +59,70 @@
 
           });
 
-         
+
           $("#add-item-to-store").submit(function(event) {
               const req = $("#add-item-to-store").serialize();
-                let params = JSON.parse('{"' + req.replace(/"/g, '\\"').replace(/&/g,'","').replace(/=/g,'":"') +
-              '"}');
+              let params = JSON.parse('{"' + req.replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') +
+                  '"}');
               let decodedParams = {}
-              Object.keys(params).forEach(function(v){
+              Object.keys(params).forEach(function(v) {
                   decodedParams[v] = decodeURIComponent(decodeURI(params[v]));
               });
-             
-              console.log(decodedParams); 
+
+              console.log(decodedParams);
               App.saveProduct(decodedParams);
-              event.preventDefault();  
+              event.preventDefault();
 
           });
-         App.renderStore();
+          App.renderStore();
       },
 
-      saveProduct : function(product) {
-          App.contracts.Election.deployed().then(function(f){
-              return f.addProductToStore(product["product-name"], product["product-candidateOne"], product["product-candidateTwo"], 
-              Date.parse(product["product-start-time"]) / 1000, Date.parse(product["product-end-time"]) / 1000,
-              product["product-condition"], {from :  web3.eth.accounts[0], gas: 4700000});    
+      saveProduct: function(product) {
+          App.contracts.Election.deployed().then(function(f) {
+              return f.addProductToStore(product["product-name"], product["product-candidateOne"], product["product-candidateTwo"],
+                  Date.parse(product["product-start-time"]) / 1000, Date.parse(product["product-end-time"]) / 1000,
+                  product["product-condition"], { from: web3.eth.accounts[0], gas: 4700000 });
           }).then(function(f) {
               alert("성공적으로 등록되었습니다.");
           });
       },
 
-      renderStore : function() {
+      renderStore: function() {
           //Get the Product Count
           // Loop through and fetch all products by Id
-           var instance;
-          return App.contracts.Election.deployed().then(function(instance){
-              return instance.productIndex.call();             
+          var instance;
+          return App.contracts.Election.deployed().then(function(instance) {
+              return instance.productIndex.call();
           }).then(function(count) {
-              for(var i=1; i<=count; i++) {
+              for (var i = 1; i <= count; i++) {
                   App.renderProduct(instance, i);
               }
           });
-        },
+      },
 
-        renderProduct : function(instance, index) {
-            App.contracts.Election.deployed().then(function(instance) {
+      renderProduct: function(instance, index) {
+          App.contracts.Election.deployed().then(function(instance) {
               return instance.getProduct.call(index);
-            }).then(function(f){
+          }).then(function(f) {
               let node = $(".databox");
               node.append("<div class='voteData'>" +
-                        "<div class='infoElection__title'> 투표 제목 : " + f[1] + "</div>" 
-                        + "<div class='infoElection__title'> 1번 후보 : " + f[2] + "</div>" +
-                         "<div class='infoElection__title'> 2번 후보 : " + f[3] + "</div>" +
-                        "<div class='infoElection__title'> 투표 기간 " + f[4] + "~" + f[5] + "</div>" +
-                        "<button class='vote__btn' ><a href='election.html'>투표 하기</a></button>" +  "</div>" );
+                  "<div class='infoElection__title'> 투표 제목 : " + f[1] + "</div>" +
+                  "<div class='infoElection__title'> 1번 후보 : " + f[2] + "</div>" +
+                  "<div class='infoElection__title'> 2번 후보 : " + f[3] + "</div>" +
+                  //   "<div class='infoElection__title'> 투표 기간 " + f[4] + "~" + f[5] + "</div>" +
+                  "<button class='vote__btn goto' ><a href='election.html'>투표 하기</a></button>" + "</div>");
 
-             console.log(f);
+              console.log(f);
           });
-          
-        }
-        
+
+      }
+
   }
 
 
-  
+
   $(function() {
       $(window).load(function() {
           App.init();
       });
   });
-

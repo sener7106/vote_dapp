@@ -4,7 +4,6 @@
 @import "login.css";
 @import "register.css";
 @import "loading.css";
-
 body {
     background-color: white;
     height: 300vh;
@@ -56,6 +55,7 @@ body {
     color: #FECBB0;
     padding: 0px 10px;
 }
+
 .contents__address {
     display: flex;
     justify-content: flex-end;
@@ -63,13 +63,13 @@ body {
     margin: 10px 10px;
     font-size: 20px;
     font-weight: 600;
-    color: rgba(0,0,0,0.5);
+    color: rgba(0, 0, 0, 0.5);
     padding: 0px 10px;
 }
 
 main {
     margin-left: 30px;
-    margin-top : 150px;
+    margin-top: 150px;
 }
 
 .section {
@@ -144,32 +144,32 @@ main {
 }
 
 .screen__image {
-    weight : 300px;
-    height : 300px;
-    margin-bottom : 50px;
+    weight: 300px;
+    height: 300px;
+    margin-bottom: 50px;
     border-radius: 50px;
     animation: flight 2s ease-in-out infinite;
 }
 
 .screen__image__vote {
-    weight : 250px;
-    height : 250px;
-    margin-bottom : 50px;
+    width: 400px;
+    height: 300px;
+    margin-bottom: 50px;
     border-radius: 50px;
     animation: flight 3s ease-in-out;
-} 
+}
+
 .vote__btn {
     background-color: var(--main-color);
     border: none;
     border-radius: 30px;
-    margin-top: 20px;
+    margin-top: 30px;
     width: 300px;
     height: 100px;
     font-size: 30px;
     font-weight: 600;
     color: white;
 }
-
 
 @keyframes flight {
     from {
@@ -197,4 +197,3 @@ main {
 .container {
     margin-top: 100px;
 }
-
