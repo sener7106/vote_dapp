@@ -3,7 +3,7 @@ pragma solidity >=0.4.22 <0.8.0;
 contract Election {
 
     enum ProductCondition {New, Used}
-
+      
       uint public productIndex;
 //Model a Candidate
     struct Candidate {
@@ -82,7 +82,8 @@ uint public candidatesCount;
      
      // mapping 변수에서 candidate struct를 읽어와 후보자의 투표수를 증가시키는것.
 
-     //trigger voted event
+     // trigger voted event;
+     emit votedEvent(_candidateId);
  }
 
  ///

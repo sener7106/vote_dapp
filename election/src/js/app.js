@@ -82,7 +82,8 @@ App = {
                     var id = candidate[0];
                     var name = candidate[1];
                     var voteCount = candidate[2];
-
+                    var totalVote = 0;
+          
 
                     // 후보자 수 만큼 electionInstance에 후보자 데이터를 저장
                     // Render candidate Result
@@ -93,8 +94,9 @@ App = {
                     // Render Candidate ballot option
                     var candidateOption = "<option value='" + id + "' >" + name + "</option>"
                     candidatesSelect.append(candidateOption);
-
+                    
                     //Render candidate Result total
+                    
                 });
             }
             return electionInstance.voters(App.account);
@@ -106,7 +108,7 @@ App = {
                 // 투표를 한 경우 폼을 삭제합니다.
             }
 
-
+            
             var day = new Date();
             var hour = day.getHours();
             var minute = day.getMinutes();
@@ -126,7 +128,7 @@ App = {
     },
 
 
-    /*
+    
             // Listen for events emitted from the contract
             listenForEvents: function() {
                 App.contracts.Election.deployed().then(function(instance) {
@@ -139,11 +141,12 @@ App = {
                     }).watch(function(error, event) {
                         console.log("event triggered", event);
                         // Reload when a new vote is recorded
+                    
                         App.render();
                     })
                 })
             },
-    */
+
 
 
     castVote: function() {
@@ -186,9 +189,8 @@ App = {
 
     }
 
-
-
 }
+
 
 $(function() {
     $(window).load(function() {
